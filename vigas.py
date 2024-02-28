@@ -1,11 +1,19 @@
 class Vigas:
 
-    def __init__(self, base, altura, comprimentoTotal, fck, cobrimento):
+    vigasCriadas = []
+
+    def __init__(self, nome, base, altura, comprimentoTotal, fck, cobrimento):
+
+        self.nome = nome
         self.base = base
         self.altura = altura
         self.comprimentoTotal = comprimentoTotal
         self.fck = fck
         self.cobrimento = cobrimento
+        Vigas.vigasCriadas.append(self)
+
+    def __str__(self):
+        return f'{self.nome} - {self.base} X {self.altura}'
 
     def volumeConcreto(self):
 
@@ -20,11 +28,15 @@ class Vigas:
         forma = perimetro * self.comprimentoTotal
 
         return f'A quantidade de fôrmas da viga é {round(forma / 10**4, 2)} m²'
+    
+    def listarVigas():
 
-viga_01 = Vigas(20, 100, 900, 35, 3) 
+        for viga in Vigas.vigasCriadas:
 
-viga_02 = Vigas(15, 50, 600, 30, 3)
+            print(viga)
 
-print(viga_02.formaViga())
+viga_01 = Vigas('Viga 01', 25, 45, 600, 25, 2.5)
+viga_02 = Vigas('Viga 02', 30, 60, 800, 30, 3)
+viga_03 = Vigas('Viga 03', 40, 100, 1000, 32, 3)
 
-print(viga_02.volumeConcreto())
+Vigas.listarVigas()
